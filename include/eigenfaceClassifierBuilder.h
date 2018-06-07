@@ -14,6 +14,8 @@
 #include <iostream>
 #include <algorithm>
 
+#include "util.h"
+
 using namespace cv;
 using namespace cv::face;
 using namespace std;

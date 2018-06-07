@@ -26,9 +26,12 @@ void read_csv(const string& filename, vector<Mat>& images, vector<int>& labels, 
 
 void buildEigenfaceClassifier(string &dataFilename, string &saveFilename) {
 	
-	// ************************************************************
 	// Check that the saveFile ends with .xml
-	// ************************************************************
+	string XMLTag = ".xml";
+	if (!endsWith(saveFilename, XMLTag)) {
+		printf("ERROR: Please use an .xml file to save the classifier.\n");
+		return;
+	}
 
 	vector<Mat> images;
 	vector<int> labels;

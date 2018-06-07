@@ -1,6 +1,6 @@
 CC = g++
 BIN = efaces
-OBJS = $(BUILD)/$(BIN).o $(BUILD)/eigenfaceClassifierBuilder.o
+OBJS = $(BUILD)/$(BIN).o $(BUILD)/eigenfaceClassifierBuilder.o $(BUILD)/util.o $(BUILD)/imageProcessing.o
 CFLAGS = -std=c++11
 INC = -I./include #-I../opencv_contrib/modules/face/include/opencv2
 LIB = `pkg-config --libs opencv`
