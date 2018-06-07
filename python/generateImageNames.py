@@ -15,4 +15,5 @@ if __name__ == "__main__":
 
     for dirname, dirnames, filenames in os.walk(BASE_PATH):
         for filename in filenames:
-            print filename;
+            path = os.path.join(dirname, filename);
+            print path;

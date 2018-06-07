@@ -8,6 +8,7 @@ bool endsWith(string &fullString, string &ending) {
 	}
 }
 
+// Reads a list of image names from a file into a vector as Mats and greyscale
 void readImagesFromFile(string &filename, vector<Mat> &images) {
 	fstream file(filename.c_str());
 
@@ -18,6 +19,8 @@ void readImagesFromFile(string &filename, vector<Mat> &images) {
 
 	string line;
 	while (getline(file, line)) {
-		images.push_back(imread(line.c_str(), 0));
+		if (!line.empty()) {
+			images.push_back(imread(line, 0));	
+		}		
 	}
 }
