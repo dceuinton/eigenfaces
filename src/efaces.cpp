@@ -10,26 +10,44 @@
 using namespace cv;
 using namespace std;
 
-string testImagesFileName = "testImagesList.txt";
+string trainingImagesFile = "trainingImageList.txt";
+string testImagesFile = "testImageList.txt";
+
+void trainClassifier(string saveFilename, string trainingDataFilename) {
+	printf("Training Eigenface classifier with the data from %s\n", trainingDataFilename.c_str());
+
+	buildEigenfaceClassifier(trainingDataFilename, saveFilename);
+
+	printf("Saving Eigenface classifier as %s\n", saveFilename.c_str());
+}
+
+void testClassifier(string classifierFilename, string testDataFilename) {
+	printf("Testing the %s classifier with data from %s\n", classifierFilename.c_str(), testDataFilename.c_str());
+
+	testOnData(classifierFilename, testDataFilename);
+}
+
+void theFullMonty(string classifierFilename, string trainingDataFilename, string testDataFilename, string outputFilename) {
+	trainAndTest(classifierFilename, trainingDataFilename, testDataFilename, outputFilename);
+}
 
 int main(int argc, char const *argv[]) {
 
 	printf("OpenCV version: %i.%i\n", CV_MAJOR_VERSION, CV_MINOR_VERSION);
 
-	std::vector<Mat> images;
-	readImagesFromFile(testImagesFileName, images);
-
-	printf("images has %i in it\n", (int)images.size());
-
-	int count = 0;
-
-	for (Mat im: images) {
-		Mat clone = im.clone();
-		// filterIntensity(clone);
-		// printf("Image %i is [%i, %i]\n", ++count, im.rows, im.cols);
-		imshow("Original", im);
-		imshow("Filtered", clone);
-		waitKey(0);
+	if (argc == 4) {
+		if (strcmp(argv[1], "test") == 0) {
+			testClassifier(string(argv[2]), string(argv[3]));
+		}
+		if (strcmp(argv[1], "train") == 0) {
+			trainClassifier(string(argv[2]), string(argv[3]));
+		}
+	} else if (argc == 6) {
+		if (strcmp(argv[1], "full") == 0) {
+			theFullMonty(string(argv[2]), string(argv[3]), string(argv[4]), string(argv[5]));
+		}
+	}else {
+		printf("Usage: ./efaces <cmd: train/test> <classifiername.xml> <datafilename>\n");
 	}
 
 	return 1;

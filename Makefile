@@ -3,7 +3,7 @@ BIN = efaces
 OBJS = $(BUILD)/$(BIN).o $(BUILD)/eigenfaceClassifierBuilder.o $(BUILD)/util.o $(BUILD)/imageProcessing.o
 CFLAGS = -std=c++11
 INC = -I./include
-LIB = `pkg-config --libs opencv --cflags dlib-1`
+LIB = `pkg-config --libs opencv`
 
 BUILD = ./src/obj
 SRC = ./src
